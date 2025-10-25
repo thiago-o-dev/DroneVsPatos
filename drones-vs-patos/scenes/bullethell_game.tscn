@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bb4g7g7vrf37v"]
+
+[ext_resource type="Script" uid="uid://7ohyrc1pcc8h" path="res://src/character_body_semi3d.gd" id="1_fjwx5"]
+[ext_resource type="PlaneMesh" uid="uid://cmrs8npjmbcns" path="res://scenes/assets/movement_limit_plane.tres" id="2_cub8u"]
+[ext_resource type="Texture2D" uid="uid://jl8b7nflkti0" path="res://icon.svg" id="3_yn3mh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cub8u"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yn3mh"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjwx5"]
+albedo_color = Color(0, 0.8568317, 0.309807, 1)
+
+[node name="BullethellGame" type="Node3D"]
+
+[node name="Drone" type="CharacterBody3D" parent="."]
+script = ExtResource("1_fjwx5")
+speed = 10.0
+movement_limit = ExtResource("2_cub8u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Drone"]
+shape = SubResource("BoxShape3D_cub8u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Drone"]
+mesh = SubResource("BoxMesh_yn3mh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.870514)
+fov = 30.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8660253, -0.43301272, 0.25, 0, 0.49999997, 0.86602545, -0.49999997, -0.75, 0.43301266, 0, 0, 0)
+
+[node name="MovementLimitGizmo" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = ExtResource("2_cub8u")
+surface_material_override/0 = SubResource("StandardMaterial3D_fjwx5")
+
+[node name="Pato" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5613055, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Pato"]
+visible = false
+texture = ExtResource("3_yn3mh")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Pato"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 1.1242704, -2.9263487, 0)
+texture = ExtResource("3_yn3mh")
