@@ -1,0 +1,7 @@
+# Godot-specific files and folders
+.godot/
+*.import
+*.translation
+export_presets.cfg
+# Optional: Ignore specific editor settings if not shared
+editor_settings-3.tres
