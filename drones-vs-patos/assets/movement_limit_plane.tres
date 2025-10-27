@@ -1,5 +1,5 @@
 [gd_resource type="PlaneMesh" format=3 uid="uid://cmrs8npjmbcns"]
 
 [resource]
-size = Vector2(13.145, 9)
-center_offset = Vector3(-2.095, 0, 0)
+size = Vector2(13.145, 6.99)
+center_offset = Vector3(-2.095, 0, 1.125)

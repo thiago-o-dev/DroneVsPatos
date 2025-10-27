@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6ftrth80unt5"]
+
+[ext_resource type="Script" uid="uid://cli2kgw7v0pbo" path="res://input_json_key.gd" id="1_1crtq"]
+
+[node name="InputJsonKey" type="Control" node_paths=PackedStringArray("submit", "json_text_edit")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1crtq")
+submit = NodePath("Button")
+json_text_edit = NodePath("TextEdit")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -64.0
+offset_right = 256.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Insira a chave JSON gerada pela pesquisa do drone"
+wrap_mode = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = 104.0
+offset_right = 60.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Avançar"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 67.0
+offset_right = 128.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "(caso não seja inserido uma chave, o pato sera o default)"

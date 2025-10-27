@@ -1,0 +1,82 @@
+[gd_scene load_steps=16 format=3 uid="uid://bplsuv7vd1dxv"]
+
+[ext_resource type="Texture2D" uid="uid://cnnemduep1ohw" path="res://assets/animations/effects/hyper_beam/frame0000.png" id="1_vb7tc"]
+[ext_resource type="Texture2D" uid="uid://cx4jdm12darps" path="res://assets/animations/effects/hyper_beam/frame0001.png" id="2_hck2r"]
+[ext_resource type="Texture2D" uid="uid://dj814h1dogfe5" path="res://assets/animations/effects/hyper_beam/frame0002.png" id="3_aulix"]
+[ext_resource type="Texture2D" uid="uid://bdhtibshf2rgg" path="res://assets/animations/effects/hyper_beam/frame0003.png" id="4_elbht"]
+[ext_resource type="Texture2D" uid="uid://buax5dqw8dava" path="res://assets/animations/effects/hyper_beam/frame0004.png" id="5_ffsxy"]
+[ext_resource type="Texture2D" uid="uid://ckei2m0jjlqc" path="res://assets/animations/effects/hyper_beam/frame0005.png" id="6_a2hy0"]
+[ext_resource type="Texture2D" uid="uid://j26h2sxhv0q" path="res://assets/animations/effects/hyper_beam/frame0006.png" id="7_mvicf"]
+[ext_resource type="Texture2D" uid="uid://bubg1cbyqpjn8" path="res://assets/animations/effects/hyper_beam/frame0007.png" id="8_yyg4m"]
+[ext_resource type="Texture2D" uid="uid://br06c4nl0d6ds" path="res://assets/animations/effects/hyper_beam/frame0008.png" id="9_t1ttm"]
+[ext_resource type="Texture2D" uid="uid://dpoja5jiy40bw" path="res://assets/animations/effects/hyper_beam/frame0009.png" id="10_ki05b"]
+[ext_resource type="Texture2D" uid="uid://d2w66185112xe" path="res://assets/animations/effects/hyper_beam/frame0010.png" id="11_sok6n"]
+[ext_resource type="Script" uid="uid://bi8d44j8gpru7" path="res://scenes/primordial_quack.gd" id="12_fwutn"]
+[ext_resource type="Texture2D" uid="uid://bgkwuavpun8ve" path="res://assets/animations/effects/hyper_beam/frame0011.png" id="12_nsmpv"]
+[ext_resource type="Script" uid="uid://cabvs4nslmpgo" path="res://src/hitbox.gd" id="13_0wo1m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d1wcg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vb7tc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hck2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_aulix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_elbht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ffsxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_a2hy0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mvicf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yyg4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t1ttm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ki05b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_sok6n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_nsmpv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 11.0
+}]
+
+[node name="HyperBeam" type="AnimatedSprite3D" node_paths=PackedStringArray("hitbox")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+offset = Vector2(-580, 0)
+no_depth_test = true
+sprite_frames = SubResource("SpriteFrames_d1wcg")
+autoplay = "default"
+frame = 11
+frame_progress = 1.0
+script = ExtResource("12_fwutn")
+hitbox = NodePath("HitBox")
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 64
+script = ExtResource("13_0wo1m")
+damage = 15.0
+metadata/_custom_type_script = "uid://cabvs4nslmpgo"
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="HitBox"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+depth = 0.655
+polygon = PackedVector2Array(0, 0, -1, 0.5, -6, 3, -20, 2, -20, -2, -6, -3, -1, -0.5)

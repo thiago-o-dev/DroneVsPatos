@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bo4ri7uirbbat"]
+
+[ext_resource type="Shader" uid="uid://5ey1jnhhlqmt" path="res://scenes/modulate_3d.gdshader" id="1_fbsy7"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fbsy7")
+shader_parameter/modulate = Color(1, 1, 1, 1)

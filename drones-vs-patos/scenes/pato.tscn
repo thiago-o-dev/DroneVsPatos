@@ -1,0 +1,132 @@
+[gd_scene load_steps=22 format=3 uid="uid://bto4kp7iq08i3"]
+
+[ext_resource type="Script" uid="uid://p82nkqyn2yip" path="res://src/pato.gd" id="1_gn7h2"]
+[ext_resource type="Script" uid="uid://cky51rkwpt3dc" path="res://src/hurtbox.gd" id="2_j5xjf"]
+[ext_resource type="Texture2D" uid="uid://pfw6b187dg37" path="res://assets/animations/duck_flying/frame0000.png" id="2_x7n1l"]
+[ext_resource type="Texture2D" uid="uid://bomh0pg652lr7" path="res://assets/animations/duck_flying/frame0001.png" id="3_g1r64"]
+[ext_resource type="Texture2D" uid="uid://c0jlwgjfh82gb" path="res://assets/animations/duck_flying/frame0002.png" id="4_8ag4g"]
+[ext_resource type="Texture2D" uid="uid://ca6xd2codbvvv" path="res://assets/animations/duck_flying/frame0003.png" id="5_31ece"]
+[ext_resource type="Texture2D" uid="uid://dobigija015cc" path="res://assets/animations/duck_primordial_quack/frame0000.png" id="6_jlxia"]
+[ext_resource type="Texture2D" uid="uid://chmabmkkegrv3" path="res://assets/animations/duck_primordial_quack/frame0001.png" id="7_qscu6"]
+[ext_resource type="Texture2D" uid="uid://d1wl2pkwy4cww" path="res://assets/animations/duck_primordial_quack/frame0002.png" id="8_r5aeb"]
+[ext_resource type="Texture2D" uid="uid://jqggfviw6sb2" path="res://assets/animations/duck_primordial_quack/frame0003.png" id="9_c7e60"]
+[ext_resource type="Texture2D" uid="uid://bwpmax8w1nk3g" path="res://assets/animations/duck_primordial_quack/frame0004.png" id="10_l0jbq"]
+[ext_resource type="Texture2D" uid="uid://bpjv657se8sw" path="res://assets/animations/duck_primordial_quack/frame0005.png" id="11_f5mhn"]
+[ext_resource type="Texture2D" uid="uid://bqw8homkdnxhe" path="res://assets/animations/duck_primordial_quack/frame0006.png" id="12_pb4m2"]
+[ext_resource type="Texture2D" uid="uid://cawrbsedk05n3" path="res://assets/animations/duck_primordial_quack/frame0007.png" id="13_yd33e"]
+[ext_resource type="Texture2D" uid="uid://ta0rgiad6wn2" path="res://assets/animations/duck_primordial_quack/frame0008.png" id="14_skv5u"]
+[ext_resource type="Texture2D" uid="uid://dd4aw113g8ya0" path="res://assets/animations/duck_primordial_quack/frame0009.png" id="15_ah51x"]
+[ext_resource type="Texture2D" uid="uid://ku5y4vn0lfph" path="res://assets/animations/duck_primordial_quack/frame0010.png" id="16_wwfo7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1cf7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x7n1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g1r64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8ag4g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_31ece")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jlxia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qscu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_r5aeb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c7e60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l0jbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f5mhn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_pb4m2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_yd33e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_skv5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ah51x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_wwfo7")
+}],
+"loop": false,
+"name": &"primordial_quack",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"snap_back",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"wake_up",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_gn7h2"]
+offsets = PackedFloat32Array(0.14814815, 0.71428573)
+colors = PackedColorArray(0, 1, 1, 1, 0, 0.46097267, 0.4609726, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2jdip"]
+gradient = SubResource("Gradient_gn7h2")
+width = 160
+height = 160
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_j5xjf"]
+radius = 0.623148
+
+[node name="Pato" type="Node3D" node_paths=PackedStringArray("duck_sprites")]
+script = ExtResource("1_gn7h2")
+duck_sprites = NodePath("DuckSprites")
+y_movement_range = 7.0
+patrol_speed = 6.0
+attack_duration = 0.5
+
+[node name="DuckSprites" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.64, 0, 0, 0, 0.64, 0, 0, 0, 0.64, 0, 0, 0)
+no_depth_test = true
+alpha_cut = 2
+sprite_frames = SubResource("SpriteFrames_1cf7q")
+animation = &"primordial_quack"
+autoplay = "default"
+
+[node name="GlowSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, -0.1)
+visible = false
+texture = SubResource("GradientTexture2D_2jdip")
+
+[node name="HurtBox" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_j5xjf")
+metadata/_custom_type_script = "uid://cky51rkwpt3dc"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_j5xjf")

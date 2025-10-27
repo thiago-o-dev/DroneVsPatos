@@ -1,50 +1,282 @@
-[gd_scene load_steps=7 format=3 uid="uid://bb4g7g7vrf37v"]
+[gd_scene load_steps=20 format=3 uid="uid://bb4g7g7vrf37v"]
 
-[ext_resource type="Script" uid="uid://7ohyrc1pcc8h" path="res://src/character_body_semi3d.gd" id="1_fjwx5"]
-[ext_resource type="PlaneMesh" uid="uid://cmrs8npjmbcns" path="res://scenes/assets/movement_limit_plane.tres" id="2_cub8u"]
-[ext_resource type="Texture2D" uid="uid://jl8b7nflkti0" path="res://icon.svg" id="3_yn3mh"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_cub8u"]
-size = Vector3(1, 0.5, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_yn3mh"]
-size = Vector3(1, 0.5, 1)
+[ext_resource type="Script" uid="uid://pm0yc63h3274" path="res://scenes/bullethell_game.gd" id="1_eakx8"]
+[ext_resource type="PackedScene" uid="uid://berl6dlxx60xs" path="res://scenes/drone.tscn" id="1_yn3mh"]
+[ext_resource type="PlaneMesh" uid="uid://cmrs8npjmbcns" path="res://assets/movement_limit_plane.tres" id="2_cub8u"]
+[ext_resource type="PackedScene" uid="uid://bto4kp7iq08i3" path="res://scenes/pato.tscn" id="3_yn3mh"]
+[ext_resource type="Texture2D" uid="uid://cmeyctdoh1alr" path="res://assets/tree2.png" id="4_jjcpm"]
+[ext_resource type="Texture2D" uid="uid://dyjj3j5rqujfy" path="res://assets/tree1.png" id="5_gdvmp"]
+[ext_resource type="Script" uid="uid://cgm3wn38dqve7" path="res://scenes/progress_bar.gd" id="6_bqt0u"]
+[ext_resource type="Script" uid="uid://coh6nq2u4fgah" path="res://scenes/progress_bar_2.gd" id="8_5sn47"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjwx5"]
-albedo_color = Color(0, 0.8568317, 0.309807, 1)
+transparency = 1
+albedo_color = Color(0.65746075, 0, 0.063508496, 0.20392157)
 
-[node name="BullethellGame" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_gdvmp"]
+size = Vector2(200, 200)
 
-[node name="Drone" type="CharacterBody3D" parent="."]
-script = ExtResource("1_fjwx5")
-speed = 10.0
-movement_limit = ExtResource("2_cub8u")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjcpm"]
+albedo_color = Color(0.3647059, 0.7254902, 0.32156864, 1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Drone"]
-shape = SubResource("BoxShape3D_cub8u")
+[sub_resource type="SphereMesh" id="SphereMesh_gdvmp"]
+radius = 26.771
+height = 36.593
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Drone"]
-mesh = SubResource("BoxMesh_yn3mh")
+[sub_resource type="Gradient" id="Gradient_gdvmp"]
+offsets = PackedFloat32Array(0, 0.5739645, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.4030364, 0.5985849, 0.7470331, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bqt0u"]
+gradient = SubResource("Gradient_gdvmp")
+
+[sub_resource type="Gradient" id="Gradient_jjcpm"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.18300654, 1)
+colors = PackedColorArray(0, 0.71397084, 0.8591215, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gdvmp"]
+gradient = SubResource("Gradient_jjcpm")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bqt0u"]
+panorama = SubResource("GradientTexture2D_gdvmp")
+
+[sub_resource type="Sky" id="Sky_eakx8"]
+sky_material = SubResource("PanoramaSkyMaterial_bqt0u")
+radiance_size = 0
+
+[sub_resource type="Environment" id="Environment_gdvmp"]
+background_mode = 2
+background_color = Color(0.7009975, 0.83528304, 1, 1)
+sky = SubResource("Sky_eakx8")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.17
+ambient_light_energy = 0.0
+glow_enabled = true
+glow_intensity = 0.37
+glow_hdr_threshold = 0.6
+glow_hdr_scale = 1.14
+glow_hdr_luminance_cap = 2.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.14443868, 0.4929158, 0.76855135, 1)
+fog_light_energy = 3.57
+fog_density = 0.7992
+fog_height = 1.0
+fog_height_density = -0.02
+fog_depth_curve = 2.143548
+fog_depth_end = 1974.3
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_bqt0u")
+
+[node name="BullethellGame" type="Node3D" node_paths=PackedStringArray("drone", "pato")]
+script = ExtResource("1_eakx8")
+drone = NodePath("Drone")
+pato = NodePath("Pato")
+
+[node name="Drone" parent="." instance=ExtResource("1_yn3mh")]
+rotation_offset = Vector3(0, 0, -0.1)
+bullet_speed = 25.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.870514)
-fov = 30.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5999999, 19.870514)
+fov = 34.4
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.8660253, -0.43301272, 0.25, 0, 0.49999997, 0.86602545, -0.49999997, -0.75, 0.43301266, 0, 0, 0)
+transform = Transform3D(0.8660254, -0.35355347, 0.3535534, 0.24999999, 0.9185585, 0.30618614, -0.43301275, -0.1767767, 0.8838835, 0, 0, 0)
+light_color = Color(1, 0.9193425, 0.6576907, 1)
+shadow_enabled = true
+shadow_blur = 9.445
 
 [node name="MovementLimitGizmo" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+visible = false
 mesh = ExtResource("2_cub8u")
 surface_material_override/0 = SubResource("StandardMaterial3D_fjwx5")
 
-[node name="Pato" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5613055, 0, 0)
+[node name="Pato" parent="." node_paths=PackedStringArray("ground_position", "player") instance=ExtResource("3_yn3mh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5613055, 0, 0)
+ground_position = NodePath("../GroundPosition")
+player = NodePath("../Drone")
 
-[node name="Sprite3D" type="Sprite3D" parent="Pato"]
-visible = false
-texture = ExtResource("3_yn3mh")
+[node name="Ambient" type="Node3D" parent="."]
 
-[node name="Sprite3D2" type="Sprite3D" parent="Pato"]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 1.1242704, -2.9263487, 0)
-texture = ExtResource("3_yn3mh")
+[node name="Node3D" type="Node3D" parent="Ambient"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, 3.1, 9.3, -4.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -9.20426, 11.515425, -6.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("5_gdvmp")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -1.9, 9.622652, -18.2)
+flip_h = true
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D4" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, 16.1, 9.829011, -26.2)
+flip_h = true
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D5" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, 7.1, 10.614118, -28.2)
+flip_h = true
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D6" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, 11.1, 8, -40.2)
+flip_h = true
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D7" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, 32.1, 9.3, -28.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D8" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, 23.1, 9.6, -30.2)
+flip_h = true
+shaded = true
+alpha_cut = 2
+texture = ExtResource("5_gdvmp")
+
+[node name="Sprite3D9" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, 27.1, 8, -42.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D10" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -22.9, 9.6, -26.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("5_gdvmp")
+
+[node name="Sprite3D11" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -31.9, 8.1, -28.2)
+flip_h = true
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D12" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -27.9, 9.5, -40.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("5_gdvmp")
+
+[node name="Sprite3D13" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -6.9, 8.1, -28.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="Sprite3D14" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -15.9, 9.6, -30.2)
+flip_h = true
+shaded = true
+alpha_cut = 2
+texture = ExtResource("5_gdvmp")
+
+[node name="Sprite3D15" type="Sprite3D" parent="Ambient/Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 4.286, -11.9, 8, -42.2)
+shaded = true
+alpha_cut = 2
+texture = ExtResource("4_jjcpm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ambient"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+mesh = SubResource("PlaneMesh_gdvmp")
+surface_material_override/0 = SubResource("StandardMaterial3D_jjcpm")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Ambient"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -20.436413, -14.030977, -66.60053)
+mesh = SubResource("SphereMesh_gdvmp")
+surface_material_override/0 = SubResource("StandardMaterial3D_jjcpm")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Ambient"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 43.99564, -18.7358, -66.60053)
+mesh = SubResource("SphereMesh_gdvmp")
+surface_material_override/0 = SubResource("StandardMaterial3D_jjcpm")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Ambient"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 43.99564, -18.7358, -15.539425)
+mesh = SubResource("SphereMesh_gdvmp")
+surface_material_override/0 = SubResource("StandardMaterial3D_jjcpm")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Ambient"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -22.152248, -18.7358, -15.539425)
+mesh = SubResource("SphereMesh_gdvmp")
+surface_material_override/0 = SubResource("StandardMaterial3D_jjcpm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Ambient"]
+environment = SubResource("Environment_gdvmp")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Ambient"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
+omni_range = 18.0
+
+[node name="GroundPosition" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control" node_paths=PackedStringArray("pato")]
+modulate = Color(0.8981218, 0, 0.02345681, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -78.0
+offset_right = 148.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("6_bqt0u")
+pato = NodePath("../../../Pato")
+
+[node name="ProgressBar2" type="ProgressBar" parent="CanvasLayer/Control" node_paths=PackedStringArray("drone")]
+modulate = Color(0.44076428, 0.8743461, 0, 1)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -78.0
+offset_right = 236.0
+offset_bottom = -51.0
+grow_vertical = 0
+script = ExtResource("8_5sn47")
+drone = NodePath("../../../Drone")

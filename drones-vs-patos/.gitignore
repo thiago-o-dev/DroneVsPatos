@@ -1,7 +1,17 @@
-# Godot-specific files and folders
+# Godot 4+ specific ignores
 .godot/
-*.import
+.nomedia
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
+
+# Imported translations (automatically generated from CSV files)
 *.translation
-export_presets.cfg
-# Optional: Ignore specific editor settings if not shared
-editor_settings-3.tres
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json

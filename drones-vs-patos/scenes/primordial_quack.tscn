@@ -1,0 +1,78 @@
+[gd_scene load_steps=15 format=3 uid="uid://13cniq06b5r"]
+
+[ext_resource type="Texture2D" uid="uid://bmtt1qak870fo" path="res://assets/animations/effects/primordial_quack/frame0000.png" id="1_42lk6"]
+[ext_resource type="Script" uid="uid://cabvs4nslmpgo" path="res://src/hitbox.gd" id="1_qmlnq"]
+[ext_resource type="Texture2D" uid="uid://dp7fc7vi45h8w" path="res://assets/animations/effects/primordial_quack/frame0001.png" id="2_eybx2"]
+[ext_resource type="Texture2D" uid="uid://cf6586rb5mf3m" path="res://assets/animations/effects/primordial_quack/frame0002.png" id="3_jr7ui"]
+[ext_resource type="Texture2D" uid="uid://djv5kxi0eett6" path="res://assets/animations/effects/primordial_quack/frame0003.png" id="4_yksqx"]
+[ext_resource type="Texture2D" uid="uid://bfl10rtil7kxa" path="res://assets/animations/effects/primordial_quack/frame0004.png" id="5_6rkxp"]
+[ext_resource type="Texture2D" uid="uid://bd4otw5o0puy5" path="res://assets/animations/effects/primordial_quack/frame0005.png" id="6_gmubs"]
+[ext_resource type="Texture2D" uid="uid://v5hmsefar67p" path="res://assets/animations/effects/primordial_quack/frame0006.png" id="7_54yp1"]
+[ext_resource type="Texture2D" uid="uid://cop0sqj8y5yw3" path="res://assets/animations/effects/primordial_quack/frame0007.png" id="8_h08qr"]
+[ext_resource type="Texture2D" uid="uid://dt4c00aqb5aje" path="res://assets/animations/effects/primordial_quack/frame0008.png" id="9_s54a7"]
+[ext_resource type="Texture2D" uid="uid://ux20365kh1hk" path="res://assets/animations/effects/primordial_quack/frame0009.png" id="10_4ij26"]
+[ext_resource type="Texture2D" uid="uid://behqtvpftp1jk" path="res://assets/animations/effects/primordial_quack/frame0010.png" id="11_1mplw"]
+[ext_resource type="Script" uid="uid://bi8d44j8gpru7" path="res://scenes/primordial_quack.gd" id="12_eybx2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l5hsy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_42lk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_eybx2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jr7ui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yksqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6rkxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gmubs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_54yp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h08qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s54a7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4ij26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1mplw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="PrimordialQuack" type="AnimatedSprite3D" node_paths=PackedStringArray("hitbox")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+offset = Vector2(-550, 0)
+no_depth_test = true
+sprite_frames = SubResource("SpriteFrames_l5hsy")
+autoplay = "default"
+frame = 10
+frame_progress = 1.0
+script = ExtResource("12_eybx2")
+hitbox = NodePath("HitBox")
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 64
+script = ExtResource("1_qmlnq")
+damage = 10.0
+metadata/_custom_type_script = "uid://cabvs4nslmpgo"
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="HitBox"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+depth = 0.655
+polygon = PackedVector2Array(0, 0, -1, 0.5, -11, 1, -20, 2, -20, -2, -11, -1, -1, -0.5)
